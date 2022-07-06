@@ -1,9 +1,11 @@
 import { Router } from 'express'
-import { loginController } from '../controllers/loginController.js';
+import { loginController, registerController } from '../controllers/authControllers.js';
+import { registerMiddle } from '../middlewares/authMiddle.js';
 
 const router = Router();
 
 router.post('/login', loginController);
+router.post('/register', registerMiddle, registerController);
 
 
 
