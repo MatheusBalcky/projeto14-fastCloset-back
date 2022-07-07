@@ -1,10 +1,10 @@
 import { Router } from 'express'
 import { loginController, registerController } from '../controllers/authControllers.js';
-import { registerMiddle } from '../middlewares/authMiddle.js';
+import { loginMiddle, registerMiddle } from '../middlewares/authMiddle.js';
 
 const router = Router();
 
-router.post('/login', loginController);
+router.post('/login', loginMiddle,loginController);
 router.post('/register', registerMiddle, registerController);
 
 

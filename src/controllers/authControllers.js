@@ -1,12 +1,25 @@
+import dotenv from 'dotenv';
+import jwt from "jsonwebtoken";
 import db from "../db.js";
 import bcrypt from 'bcrypt';
 
-export async function loginController (req, res){
-    const loginBody = req.body;
+dotenv.config()
 
+export function loginController(req, res) {
+    const user = req.body;
+
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+
+    return res.status(200).json({
+        user: {
+            name: user.id,
+            email: user.email
+        },
+        token,
+    });
 }
 
-export async function registerController (req, res){
+export async function registerController(req, res) {
     const registerBody = res.locals.registerBody;
     const passwordCrypted = bcrypt.hashSync(registerBody.password, 10);
 
