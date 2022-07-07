@@ -1,8 +1,5 @@
 import { loginSchema, registerSchema } from "../schemas/authSchemas.js";
-import dotenv from 'dotenv';
 import db from '../db.js'
-
-dotenv.config()
 
 export async function registerMiddle(req, res, next) {
     const registerBody = req.body;
@@ -44,15 +41,10 @@ export async function loginMiddle(req, res, next) {
         }
 
         if (user && bcrypt.compareSync(usuario.password, user.password)) {
-            const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
 
-            return res.status(201).json({
-                user: {
-                    name: user.id,
-                    email: user.email
-                },
-                token,
-            });
+            res.locals.login = user;
+            
+            next();
 
         } else {
             return res.status(401).send('Senha ou email incorretos!');
