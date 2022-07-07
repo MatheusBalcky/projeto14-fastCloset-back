@@ -1,5 +1,6 @@
 import { loginSchema, registerSchema } from "../schemas/authSchemas.js";
 import db from '../db.js'
+import bcrypt from 'bcrypt';
 
 export async function registerMiddle(req, res, next) {
     const registerBody = req.body;
@@ -37,10 +38,10 @@ export async function loginMiddle(req, res, next) {
         const user = await db.collection('users').findOne({ email: loginBody.email });
 
         if (!user) {
-            return res.status(409).send('Você ainda não possui uma conta, cadastre-se!')
+            return res.status(404).send('Você ainda não possui uma conta, cadastre-se!')
         }
 
-        if (user && bcrypt.compareSync(usuario.password, user.password)) {
+        if (user && bcrypt.compareSync(loginBody.password, user.password)) {
 
             res.locals.login = user;
             
