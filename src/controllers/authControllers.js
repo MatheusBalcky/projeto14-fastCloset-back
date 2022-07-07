@@ -5,25 +5,18 @@ import bcrypt from 'bcrypt';
 
 dotenv.config()
 
-export async function loginController(req, res) {
+export function loginController(req, res) {
     const user = req.body;
 
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
 
-    try {
-
-        return res.status(200).json({
-            user: {
-                name: user.id,
-                email: user.email
-            },
-            token,
-        });
-
-    } catch (error) {
-        res.sendstatus(500);
-    }
-
+    return res.status(200).json({
+        user: {
+            name: user.id,
+            email: user.email
+        },
+        token,
+    });
 }
 
 export async function registerController(req, res) {
