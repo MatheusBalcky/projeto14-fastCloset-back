@@ -22,7 +22,7 @@ export function loginController(req, res) {
 export async function registerController(req, res) {
     const registerBody = res.locals.registerBody;
     const passwordCrypted = bcrypt.hashSync(registerBody.password, 10);
-
+    
     try {
         await db.collection('users').insertOne({
             ...registerBody,
