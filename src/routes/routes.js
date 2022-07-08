@@ -2,10 +2,12 @@ import { Router } from 'express'
 import { loginController, registerController } from '../controllers/authControllers.js';
 import { loginMiddle, registerMiddle } from '../middlewares/authMiddle.js';
 import { productIdControl } from '../controllers/productIdControl.js';
-import { finishOrderControl } from '../controllers/finishOrderControl.js';
+
+import { finishOrderControl, ordersFinishedControl } from '../controllers/finishOrderControl.js';
 import { addProductMiddle } from '../middlewares/productsMiddle.js';
 import { addProductController } from '../controllers/addProductControl.js';
 import { getProductsController } from '../controllers/getProductsController.js';
+
 
 const router = Router();
 
@@ -17,7 +19,9 @@ router.get('/product/:id', productIdControl);
 
 
 
-router.post('/finishorder', finishOrderControl)
+router.post('/finishorder', finishOrderControl);
+router.get('/ordersfinished/:order', ordersFinishedControl);
+
 
 // ! ROTA DE TESTE QND FOR DÁ O DEPLOY
 router.get('/helloworld', (req, res) => {

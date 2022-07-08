@@ -2,6 +2,9 @@ import db from "../db.js"
 
 export async function productIdControl (req, res){
     const productId = req.params.id;
+
+    // ! FAZER VERIFICAÇÃO JWT
+    
     try {
         const product = await db.collection('products').findOne({ id: productId});
 
