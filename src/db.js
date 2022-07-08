@@ -1,11 +1,14 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 import dotenv from 'dotenv';
-dotenv.config()
+
+dotenv.config();
 
 const mongoClient = new MongoClient(process.env.MONGO_URI);
+let db;
+mongoClient.connect(() => {
+  db = mongoClient.db(process.env.MONGO_DATABASE);
+});
 
-await mongoClient.connect();
+const objectId = ObjectId;
 
-const db = mongoClient.db(process.env.MONGO_DATABASE);
-
-export default db;
+export { db, objectId };
