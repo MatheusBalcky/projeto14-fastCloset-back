@@ -8,7 +8,7 @@ dotenv.config()
 export async function loginController(req, res) {
     const user = res.locals.login;
 
-    const token = jwt.sign({ id: user.id }, "secret", { expiresIn: "2h" });
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "2h" });
 
     await db.collection('sessions').insertOne({
         token,

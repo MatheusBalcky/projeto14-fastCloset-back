@@ -1,4 +1,3 @@
-import { ObjectId } from 'mongodb';
 import db from '../db.js'
 import { productSchema } from '../schemas/productSchema.js';
 
@@ -21,7 +20,7 @@ export async function addProductMiddle(req, res, next) {
             return res.status(409).send("Token inválido.");
         }
 
-        if (session.email !== "pedro_admin@gmail.com" && session.email !== "matheus_admin@gmail.com") {
+        if (session.email !== process.env.EMAIL1 && session.email !== process.env.EMAIL2) {
             return res.status(401).send("Você não possui autorização para postar produtos.");
         }
 
