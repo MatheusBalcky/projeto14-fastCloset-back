@@ -3,9 +3,12 @@ import { loginController, registerController } from '../controllers/authControll
 import { loginMiddle, registerMiddle } from '../middlewares/authMiddle.js';
 import { productIdControl } from '../controllers/productIdControl.js';
 import { finishOrderControl } from '../controllers/finishOrderControl.js';
+import { addProductMiddle } from '../middlewares/productsMiddle.js';
+import { addProductController } from '../controllers/addProductControl.js';
 
 const router = Router();
 
+router.post('/addProduct', addProductMiddle, addProductController)
 router.post('/login', loginMiddle,loginController);
 router.post('/register', registerMiddle, registerController);
 router.get('/product/:id', productIdControl);

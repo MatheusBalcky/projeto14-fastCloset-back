@@ -5,10 +5,16 @@ import db from '../db.js';
 
 dotenv.config()
 
-export function loginController(req, res) {
+export async function loginController(req, res) {
     const user = res.locals.login;
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user.id }, "secret", { expiresIn: "2h" });
+
+    await db.collection('sessions').insertOne({
+        token,
+        userId: user._id, 
+        email: user.email
+    });
 
     return res.status(200).json({
         user: {
