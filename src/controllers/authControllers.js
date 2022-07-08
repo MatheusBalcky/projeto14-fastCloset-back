@@ -1,18 +1,18 @@
 import dotenv from 'dotenv';
 import jwt from "jsonwebtoken";
-import db from "../db.js";
 import bcrypt from 'bcrypt';
+import db from '../db.js';
 
 dotenv.config()
 
 export function loginController(req, res) {
-    const user = req.body;
+    const user = res.locals.login;
 
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
 
     return res.status(200).json({
         user: {
-            name: user.id,
+            name: user.name,
             email: user.email
         },
         token,
