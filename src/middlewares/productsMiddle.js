@@ -25,14 +25,14 @@ export async function addProductMiddle(req, res, next) {
         }
 
         const productlExists = await db.collection('products').findOne({ title: product.title });
-        
+
         if (productlExists) {
             return res.status(409).send('Já existe um produto com este título.')
+        } else {
+            res.locals.product = product;
+
+            next();
         }
-
-        res.locals.product = product;
-
-        next();
 
     } catch (error) {
         console.log(error)
