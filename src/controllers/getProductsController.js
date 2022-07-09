@@ -7,5 +7,5 @@ export async function getProductsController(req, res) {
       .find()
       .toArray();
   
-    res.send(products);
+    res.status(200).send(products);
 }

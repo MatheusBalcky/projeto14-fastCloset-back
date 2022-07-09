@@ -24,15 +24,15 @@ export async function addProductMiddle(req, res, next) {
             return res.status(401).send("Você não possui autorização para postar produtos.");
         }
 
-        const productlExists = await db.collection('products').findOne({ title: product.title });
-        
+        const productlExists = await db.collection('products').findOne({ product });
+
         if (productlExists) {
-            return res.status(409).send('Já existe um produto com este título.')
+            return res.status(409).send('Esse produto já está cadastrado.')
+        } else {
+            res.locals.product = product;
+
+            next();
         }
-
-        res.locals.product = product;
-
-        next();
 
     } catch (error) {
         console.log(error)
