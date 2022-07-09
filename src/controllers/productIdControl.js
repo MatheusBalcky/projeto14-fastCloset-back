@@ -1,12 +1,11 @@
-import db from "../db.js"
+import db from "../db.js";
+import { ObjectId } from "mongodb";
 
 export async function productIdControl (req, res){
     const productId = req.params.id;
 
-    // ! FAZER VERIFICAÇÃO JWT
-    
     try {
-        const product = await db.collection('products').findOne({ id: productId});
+        const product = await db.collection('products').findOne({ _id: ObjectId(productId)});
 
         if(!product){
             return res.status(404).send('Produto não encontrado');
