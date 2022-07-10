@@ -6,15 +6,26 @@ import { finishOrderControl, ordersFinishedControl } from '../controllers/orders
 import { addProductMiddle } from '../middlewares/productsMiddle.js';
 import { addProductController } from '../controllers/addProductControl.js';
 import { getProductsController } from '../controllers/getProductsController.js';
+import { insertCartControl } from '../controllers/cartControl.js';
 
 
 const router = Router();
 
-router.post('/addProduct', addProductMiddle, addProductController)
-router.get('/products', getProductsController)
+// & PRODUCTS ROUTES
+router.post('/addProduct', addProductMiddle, addProductController);
+router.get('/products', getProductsController);
+router.get('/product/:id', productIdControl);
+
+// & AUTHENTICATION ROUTES
 router.post('/login', loginMiddle,loginController);
 router.post('/register', registerMiddle, registerController);
-router.get('/product/:id', productIdControl);
+
+// & CART ROUTES
+router.post('/cart', insertCartControl);
+router.get('/cart', );
+
+
+// & FINISH AN ORDER ROUTES
 router.post('/finishorder', finishOrderControl);
 router.get('/ordersfinished/:order', ordersFinishedControl);
 
