@@ -76,7 +76,7 @@ export async function getCartControl (req, res) {
         const cart = await db.collection('carts').findOne({ userId });
 
         if (!cart){
-            return res.status(200).send("Carrinho vazio");
+            return res.status(200).send(["Carrinho vazio"]);
         }
 
         const { products } = await db.collection('carts').findOne({ userId });
