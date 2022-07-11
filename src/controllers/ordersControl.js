@@ -29,7 +29,7 @@ export async function finishOrderControl(req, res) {
             fromUserId: session.userId,
             ...bodyOrder
         });
-
+        
     } catch (error) {
         res.status(400).send(`${error}`)
     }
