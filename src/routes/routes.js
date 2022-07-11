@@ -2,7 +2,7 @@ import { Router } from 'express'
 import { loginController, registerController } from '../controllers/authControllers.js';
 import { loginMiddle, registerMiddle } from '../middlewares/authMiddle.js';
 import { productIdControl } from '../controllers/productIdControl.js';
-import { finishOrderControl, ordersFinishedControl } from '../controllers/ordersControl.js';
+import { finishOrderControl, getOrdersById } from '../controllers/ordersControl.js';
 import { addProductMiddle } from '../middlewares/productsMiddle.js';
 import { addProductController } from '../controllers/addProductControl.js';
 import { getProductsController } from '../controllers/getProductsController.js';
@@ -27,7 +27,7 @@ router.get('/cart', getCartControl);
 
 // & FINISH AN ORDER ROUTES
 router.post('/finishorder', finishOrderControl);
-router.get('/ordersfinished/:order', ordersFinishedControl);
+router.get('/ordersfinished/:userId', getOrdersById);
 
 
 // ! ROTA DE TESTE QND FOR DÁ O DEPLOY
