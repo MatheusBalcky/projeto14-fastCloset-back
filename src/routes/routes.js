@@ -6,7 +6,7 @@ import { finishOrderControl, ordersFinishedControl } from '../controllers/orders
 import { addProductMiddle } from '../middlewares/productsMiddle.js';
 import { addProductController } from '../controllers/addProductControl.js';
 import { getProductsController } from '../controllers/getProductsController.js';
-import { insertCartControl } from '../controllers/cartControl.js';
+import { insertCartControl, getCartControl } from '../controllers/cartControl.js';
 
 
 const router = Router();
@@ -22,7 +22,7 @@ router.post('/register', registerMiddle, registerController);
 
 // & CART ROUTES
 router.post('/cart', insertCartControl);
-router.get('/cart', );
+router.get('/cart', getCartControl);
 
 
 // & FINISH AN ORDER ROUTES
